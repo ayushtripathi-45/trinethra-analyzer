@@ -36,11 +36,13 @@ A psychology intern pastes a supervisor call transcript → the app runs it thro
 
 **Input — Paste transcript and run**
 
-![Trinethra Input Screen](./screenshot-input.png)
+<img width="538" height="584" alt="Screenshot 2026-05-01 131814" src="https://github.com/user-attachments/assets/84492fb8-a105-40eb-8d8f-889d70ed58e3" />
+
 
 **Output — Structured analysis panels**
 
-![Trinethra Output Screen](./screenshot-output.png)
+<img width="1365" height="604" alt="Screenshot 2026-05-01 132009" src="https://github.com/user-attachments/assets/09d4d342-4cb7-49cd-8a0a-4b2dc15cde97" />
+
 
 ---
 
