@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const SYSTEM_PROMPT = `You are an expert analyst for DeepThought, a B2B consulting company.
+const SYSTEM_PROMPT = `You are an expert analyst for Trinethra, a B2B consulting company.
 Analyze the supervisor transcript about a Fellow (early-career professional).
 
 RUBRIC (1-10 scale):

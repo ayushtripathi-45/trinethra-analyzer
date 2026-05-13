@@ -1,128 +1,98 @@
+# 👁️ TRINETHRA v4.0
+### The Neural Supervisor Feedback Intelligence Engine
+**Software Developer Internship Assignment**
+
+---
+
 <div align="center">
-
-# Trinethra
-### Supervisor Feedback Analyzer — DeepThought
-
-*AI-assisted tool that turns unstructured supervisor transcripts into structured Fellow performance analyses — cutting intern review time from 45–60 min down to under 10.*
-
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
+  <img src="https://img.shields.io/badge/Neural_Engine-Trinethra-00f2ff?style=for-the-badge&logo=ai&logoColor=black" />
+  <img src="https://img.shields.io/badge/UI_UX-High_Fidelity-7000ff?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js" />
+  <img src="https://img.shields.io/badge/LLM-Ollama_Llama3.2-white?style=for-the-badge" />
 </div>
 
 ---
 
-## What it does
-
-A psychology intern pastes a supervisor call transcript → the app runs it through a local LLM → returns a structured analysis in under 60 seconds.
-
-**Output per transcript:**
-
-| Section | What you get |
-|---|---|
-| **Extracted Evidence** | Quotes colour-coded positive / negative / neutral |
-| **Suggested Score (1–10)** | Rubric score with written justification + confidence level |
-| **KPI Mapping** | Which of the 8 business KPIs the Fellow's work touches |
-| **Gap Analysis** | Rubric dimensions the transcript did NOT cover |
-| **Follow-up Questions** | Ready-to-use questions targeting each gap |
-
-> AI suggests. Human decides. Every section is editable — there's no "Accept All" button by design.
+## 🌌 Overview
+**Trinethra** (The Third Eye) is a high-fidelity **Neural Workspace** designed to decode complex behavioral DNA from supervisor-intern transcripts. It transforms raw dialogue into structured, strategic behavioral rubrics with precision mapping to 8 critical KPI domains.
 
 ---
 
-## Screenshots
+## 🚀 Cinematic Features
 
-**Input — Paste transcript and run**
+### 🧠 Neural Logic Engine
+*   **Behavioral DNA Decoding**: Advanced pattern recognition to identify hidden signals in feedback.
+*   **KPI Alignment**: Automated mapping to Technical Proficiency, Systemic Collaboration, and 6 other domains.
+*   **Scoring Algorithms**: 1-10 logic-based scoring with deep-reasoning justifications.
 
-<img width="538" height="584" alt="Screenshot 2026-05-01 131814" src="https://github.com/user-attachments/assets/84492fb8-a105-40eb-8d8f-889d70ed58e3" />
-
-
-**Output — Structured analysis panels**
-
-<img width="1365" height="604" alt="Screenshot 2026-05-01 132009" src="https://github.com/user-attachments/assets/09d4d342-4cb7-49cd-8a0a-4b2dc15cde97" />
-
-
----
-
-## Tech Stack
-
-| Layer | Tech |
-|---|---|
-| Frontend | React + Vite |
-| Styling | Tailwind CSS |
-| Backend | Node.js + Express |
-| LLM Runtime | Ollama (llama3.2, runs locally — no API key) |
+### 🎨 High-Fidelity UI/UX
+*   **Precision Crosshair Cursor**: A custom-engineered tracking system for a clinical, high-tech experience.
+*   **Shutter Transitions**: Cinematic page wipes with animated "MISSION" and "NEURAL" status text.
+*   **Neural Pulse Background**: A living obsidian theme with pulsing coordinate grids and noise textures.
+*   **Glassmorphism 2.0**: Premium translucent components with neon glows and kinetic physics.
 
 ---
 
-## Architecture
+## 🛠 Tech Stack
 
-```
-Browser  →  React (port 5173)
-                │  POST /api/analyze
-                ▼
-         Express (port 3001)
-         - injects rubric into prompt
-         - calls Ollama, parses JSON
-                │  POST localhost:11434/api/generate
-                ▼
-         Ollama — llama3.2 (local)
+```mermaid
+graph TD
+    A[Frontend: React + Vite] --> B[Motion: Framer Motion]
+    A --> C[3D: Three.js + R3F]
+    A --> D[Styling: Vanilla CSS]
+    A --> E[Backend: Node.js + Express]
+    E --> F[Intelligence: Ollama Llama3.2]
 ```
 
 ---
 
-## Setup
+## 🏗 Setup & Deployment
 
-**Prerequisites:** Node.js v18+, Ollama installed
+### 1. Prerequisites
+*   Node.js (v18+)
+*   Ollama (with `llama3.2` model)
 
+### 2. Initialization
 ```bash
 # 1. Pull the model (~2 GB)
 ollama pull llama3.2
 
-# 2. Clone & install
+# 2. Clone and enter
 git clone https://github.com/ayushtripathi-45/trinethra-analyzer.git
 cd trinethra-analyzer
 
-# 3. Backend
-cd backend && npm install && cp .env.example .env
+# 3. Start Backend
+cd backend
+npm install
+node index.js
 
-# 4. Frontend
-cd ../frontend && npm install
-```
-
-**Run (two terminals):**
-
-```bash
-# Terminal 1
-cd backend && npm run dev
-
-# Terminal 2
-cd frontend && npm run dev
+# 4. Start Frontend
+cd ../frontend
+npm install
+npm run dev
 ```
 
 Open **http://localhost:5173**
 
 ---
 
-## Design Decisions Worth Noting
+## 🔮 Future Roadmap: The Path to V5.0
 
-**Reliable JSON from the LLM** — Three-layer parsing: strict parse → strip markdown fences → accept partial result with UI warning. Reduced malformed responses from ~30% to under 5%.
-
-**Preventing automation bias** — Score is labelled "Suggested." Intern must actively move the slider to finalize. Low-confidence scores show an amber warning badge. Evidence is always shown so the intern can verify the model's reasoning.
-
----
-
-## What I'd Add Next
-
-- Split-pane layout (transcript + analysis side by side)
-- Session history sidebar for processing multiple Fellows
-- Streaming response display (real-time output instead of spinner)
-- Ollama `"format": "json"` mode to remove the parsing fallback entirely
+- [ ] **Biometric Session Persistence**: Secure user history tracking.
+- [ ] **Multi-Agent Synthesis**: Cross-supervisor behavioral mapping.
+- [ ] **Real-Time Voice Analysis**: Direct audio-to-neural mapping.
+- [ ] **Interactive DNA Visualizer**: 3D spider-charts of growth metrics.
 
 ---
 
-## Contact
+## 📞 Contact
 
 Built by **Ayush Tripathi** · [ayushtripathi9821@gmail.com](mailto:ayushtripathi9821@gmail.com) · [LinkedIn](https://linkedin.com/in/ayush-tripathi45)
+
+---
+
+<div align="center">
+  <p><i>"Seeing beyond the obvious. Decoding the human element."</i></p>
+  <img src="https://img.shields.io/badge/Status-Operational-success?style=flat-square" />
+  <img src="https://img.shields.io/badge/Version-4.0.0-blue?style=flat-square" />
+</div>
