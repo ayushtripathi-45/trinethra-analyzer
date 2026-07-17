@@ -4,7 +4,7 @@ const cors = require('cors');
 const axios = require('axios');
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
   ? process.env.GEMINI_API_KEY.replace(/['"]/g, '').trim()
   : null;
