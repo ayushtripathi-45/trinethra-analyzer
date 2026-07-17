@@ -1,34 +1,52 @@
 :root {
   --primary: #00f2ff;
-  --primary-glow: rgba(0, 242, 255, 0.6);
-  --secondary: #7000ff;
-  --secondary-glow: rgba(112, 0, 255, 0.6);
-  --bg-dark: #020205; 
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --text-main: #ffffff;
-  --text-dim: #a0a0c0;
-  --border: rgba(255, 255, 255, 0.08);
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --primary-glow: rgba(0, 242, 255, 0.3);
+  --primary-glow-thick: rgba(0, 242, 255, 0.15);
+  --secondary: #bd00ff;
+  --secondary-glow: rgba(189, 0, 255, 0.4);
+  --bg-dark: #030307; 
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --text-main: #f5f5f7;
+  --text-dim: #9494a8;
+  --border: rgba(255, 255, 255, 0.05);
+  --font-main: 'Archivo Narrow', sans-serif;
+  --font-secondary: 'Aref Ruqaa', serif;
+  --font-third: 'Martel', serif;
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none !important;
+
 }
 
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
-  font-family: var(--font-body);
+  font-family: var(--font-third);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* Three-role font utilities */
+.font-main { font-family: var(--font-main); }
+.font-secondary { font-family: var(--font-secondary); }
+.font-third { font-family: var(--font-third); }
+
+.kpi-tag, .evidence-meta, .input-label, .warning-bar, .nav-link, .card-title, .score-max, .meta-label, .version-badge, .auth-toggle button {
+  font-family: var(--font-main);
+  font-weight: 600;
 }
 
 /* Neural Background: Animated Pulse + Grid + Noise */
@@ -62,7 +80,24 @@ body {
   background-size: 40px 40px;
   pointer-events: none;
   z-index: -1;
-  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  /* Dim base grid, reveals brightly around the cursor via --mx/--my */
+  --mx: 50%;
+  --my: 50%;
+  -webkit-mask-image: radial-gradient(circle 260px at var(--mx) var(--my), black 0%, rgba(0,0,0,0.35) 45%, transparent 80%);
+  mask-image: radial-gradient(circle 260px at var(--mx) var(--my), black 0%, rgba(0,0,0,0.35) 45%, transparent 80%);
+}
+
+/* Bright glowing grid that shows only near the cursor */
+.grid-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 242, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(circle 240px at var(--mx) var(--my), black 0%, transparent 70%);
+  mask-image: radial-gradient(circle 240px at var(--mx) var(--my), black 0%, transparent 70%);
 }
 
 .noise-overlay {
@@ -77,36 +112,30 @@ body {
   z-index: 9999;
 }
 
-/* Precision Crosshair */
-.cursor-crosshair-h, .cursor-crosshair-v {
+/* Premium Cursor Ring */
+.cursor-ring {
   position: fixed;
-  background: var(--primary);
-  opacity: 0.3;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--secondary-glow);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);
+  will-change: transform, left, top;
 }
 
-.cursor-crosshair-h { width: 50px; height: 1px; }
-.cursor-crosshair-v { width: 1px; height: 50px; }
-
-.cursor-crosshair-h.hover, .cursor-crosshair-v.hover {
-  opacity: 1;
-  width: 70px;
-  height: 2px;
-  box-shadow: 0 0 20px var(--primary);
-}
-
-.cursor-point {
-  width: 5px;
-  height: 5px;
-  background: white;
-  border-radius: 50%;
+.cursor-dot {
   position: fixed;
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 15px white;
+  box-shadow: 0 0 12px var(--primary);
+  will-change: transform, left, top;
 }
 
 /* Glass Card Premium */
@@ -152,7 +181,7 @@ body {
 .nav-links {
   display: flex !important;
   align-items: center !important;
-  gap: 80px !important; /* Huge gap to ensure no overlap */
+  gap: 32px !important;
 }
 
 .nav-link {
@@ -237,4 +266,197 @@ body {
   color: black;
   box-shadow: 0 0 50px var(--primary);
   transform: translateY(-2px);
+}
+
+/* Glow / Neon text helper used across pages */
+.neon-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
+  text-shadow: 0 0 18px rgba(0, 242, 255, 0.25);
+  letter-spacing: -0.01em;
+}
+
+/* Pulsing accent for primary CTA */
+.pulse-primary {
+  animation: pulseGlow 2.4s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 25px rgba(0, 242, 255, 0.25); }
+  50% { box-shadow: 0 0 45px rgba(0, 242, 255, 0.55); }
+}
+
+/* ---------- Version / Timeline pages ---------- */
+.version-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.version-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: rgba(0, 242, 255, 0.05);
+  margin-bottom: 24px;
+}
+
+.version-section {
+  max-width: 860px;
+  margin: 0 auto 40px;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Timeline list for fixes / changelog */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 28px 28px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.timeline li h4 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.timeline li p {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* ---------- Auth (Upcoming page) ---------- */
+.auth-wrap {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.auth-toggle {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.auth-toggle button {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 12px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-toggle button.active {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(0, 242, 255, 0.06);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+}
+
+.auth-field {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+  transition: var(--transition);
+}
+
+.auth-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.12);
+}
+
+.auth-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 6px;
+}
+
+.auth-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 242, 255, 0.35);
+  filter: brightness(1.08);
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.roadmap-item {
+  padding: 30px;
+  text-align: left;
+  border-left: 4px solid var(--secondary);
+}
+
+.roadmap-item h4 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.roadmap-item p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }

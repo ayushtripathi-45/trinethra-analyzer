@@ -208,27 +208,30 @@ export default function Explore() {
 
               <motion.div className="glass-card result-card" variants={fadeInUp}>
                 <h3 className="card-title neon-text">Strategic KPI Alignment</h3>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                <div className="kpi-container">
                   {result.kpiMapping?.map((k, i) => (
-                    <div key={i} className="kpi-tag" style={{ margin: 0 }}>
-                      {k.kpi} • {k.systemOrPersonal}
+                    <div key={i} className="kpi-row">
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-main)', marginRight: '15px', lineHeight: '1.5' }}>{k.evidence}</span>
+                      <div className="kpi-tag">{k.kpi} • {k.systemOrPersonal}</div>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div className="glass-card result-card" variants={fadeInUp}>
-                <h3 className="card-title neon-text">Gap Analysis</h3>
-                {result.gaps?.length === 0 ? (
-                  <p>No critical behavioral gaps detected.</p>
-                ) : (
-                  result.gaps?.map((g, i) => (
-                    <div key={i} className="gap-item">
-                      <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '5px' }}>{g.dimension}</strong>
-                      <p style={{ fontSize: '0.95rem' }}>{g.detail}</p>
-                    </div>
-                  ))
-                )}
+                <h3 className="card-title neon-text">Gap Analysis & Focus</h3>
+                <div className="gap-list">
+                  {result.gaps?.length === 0 ? (
+                    <p style={{ color: 'var(--text-dim)' }}>No critical behavioral gaps detected.</p>
+                  ) : (
+                    result.gaps?.map((g, i) => (
+                      <div key={i} className="gap-item">
+                        <strong style={{ color: 'var(--primary)', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '0.1em', display: 'block', marginBottom: '8px' }}>{g.dimension}</strong>
+                        <p style={{ fontSize: '0.95rem', color: 'var(--text-main)', lineHeight: '1.6' }}>{g.detail}</p>
+                      </div>
+                    ))
+                  )}
+                </div>
               </motion.div>
             </motion.div>
           )}

@@ -5,7 +5,7 @@ import "./App.css";
 
 // Components
 import Navbar from "./components/Navbar";
-import CustomCursor from "./components/CustomCursor";
+
 import Preloader from "./components/Preloader";
 // import Antigravity from "./components/Antigravity";
 
@@ -13,6 +13,9 @@ import Preloader from "./components/Preloader";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Explore from "./pages/Explore";
+import Version1 from "./pages/Version1";
+import Version2 from "./pages/Version2";
+import Upcoming from "./pages/Upcoming";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -23,6 +26,9 @@ function AnimatedRoutes() {
         <Route path="/" element={<PageWrapper title="CORE"><Home /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper title="MISSION"><About /></PageWrapper>} />
         <Route path="/explore" element={<PageWrapper title="NEURAL"><Explore /></PageWrapper>} />
+        <Route path="/version-1" element={<PageWrapper title="V1.0"><Version1 /></PageWrapper>} />
+        <Route path="/version-2" element={<PageWrapper title="V2.0"><Version2 /></PageWrapper>} />
+        <Route path="/upcoming" element={<PageWrapper title="V3.0"><Upcoming /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );
@@ -64,6 +70,17 @@ function PageWrapper({ children, title }) {
 export default function App() {
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const move = (e) => {
+      document.querySelectorAll(".grid-overlay").forEach((el) => {
+        el.style.setProperty("--mx", `${e.clientX}px`);
+        el.style.setProperty("--my", `${e.clientY}px`);
+      });
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
   return (
     <Router>
       <div className="neural-bg-layer" />
@@ -83,7 +100,6 @@ export default function App() {
             {/* Neural Background - Static Glows */}
             <div className="neural-bg-layer" />
 
-            <CustomCursor />
             <Navbar />
             <AnimatedRoutes />
           </motion.div>

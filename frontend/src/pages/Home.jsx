@@ -59,8 +59,8 @@ export default function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -40, opacity: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="gradient-text" 
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '900', letterSpacing: '-0.02em', position: 'absolute' }}
+                className="gradient-text font-main" 
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '700', letterSpacing: '-0.02em', position: 'absolute' }}
               >
                 {ROTATING_WORDS[index]}
               </motion.h1>
@@ -68,16 +68,17 @@ export default function Home() {
           </div>
           <div style={{ overflow: 'hidden', marginBottom: '24px' }}>
             <motion.h1 
-              className="neon-text" 
+              className="neon-text font-secondary" 
               variants={textRevealVars}
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '300', letterSpacing: '0.25em', textTransform: 'uppercase' }}
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '500', letterSpacing: '0.1em' }}
             >
               Deconstructed
             </motion.h1>
           </div>
           
-          <motion.p 
+           <motion.p 
             variants={textRevealVars}
+            className="font-third"
             style={{ fontSize: '1rem', maxWidth: '500px', margin: '0 auto 40px', color: 'var(--text-dim)', lineHeight: '1.6' }}
           >
             Trinethra v4.0 leverages neural logic to decode supervisor feedback into actionable behavioral intelligence.

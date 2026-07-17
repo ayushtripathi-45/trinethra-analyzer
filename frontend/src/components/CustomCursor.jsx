@@ -1,21 +1,36 @@
 import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  // Mouse coordinates
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Spring physics for trailing ring
+  const ringX = useSpring(cursorX, { stiffness: 150, damping: 20 });
+  const ringY = useSpring(cursorY, { stiffness: 150, damping: 20 });
 
   useEffect(() => {
     const moveCursor = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
+
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
 
     const handleHoverStart = () => setIsHovering(true);
     const handleHoverEnd = () => setIsHovering(false);
 
     window.addEventListener("mousemove", moveCursor);
-    
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+
     const updateInteractables = () => {
-      const interactables = document.querySelectorAll("a, button, textarea, .glass-card, input");
+      const interactables = document.querySelectorAll("a, button, textarea, .glass-card, input, select");
       interactables.forEach(el => {
         el.addEventListener("mouseenter", handleHoverStart);
         el.addEventListener("mouseleave", handleHoverEnd);
@@ -28,34 +43,40 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
       observer.disconnect();
     };
   }, []);
 
   return (
     <>
-      {/* Precision Crosshair */}
-      <div
-        className={`cursor-crosshair-h ${isHovering ? 'hover' : ''}`}
-        style={{ 
-          left: `${position.x}px`, 
-          top: `${position.y}px`
+      {/* Outer Spring Ring */}
+      <motion.div
+        className="cursor-ring"
+        style={{
+          left: ringX,
+          top: ringY,
         }}
+        animate={{
+          scale: isHovering ? 1.8 : isClicked ? 0.75 : 1,
+          borderColor: isHovering ? "var(--primary)" : "var(--secondary-glow)",
+          backgroundColor: isHovering ? "var(--primary-glow-thick)" : "rgba(0, 0, 0, 0)",
+        }}
+        transition={{ type: "spring", stiffness: 350, damping: 25 }}
       />
-      <div
-        className={`cursor-crosshair-v ${isHovering ? 'hover' : ''}`}
-        style={{ 
-          left: `${position.x}px`, 
-          top: `${position.y}px`
+      {/* Inner Precision Dot */}
+      <motion.div
+        className="cursor-dot"
+        style={{
+          left: cursorX,
+          top: cursorY,
         }}
-      />
-      {/* Small Glowing Point */}
-      <div
-        className={`cursor-point ${isHovering ? 'hover' : ''}`}
-        style={{ 
-          left: `${position.x}px`, 
-          top: `${position.y}px`
+        animate={{
+          scale: isHovering ? 0 : 1,
+          backgroundColor: isHovering ? "var(--primary)" : "var(--primary)",
         }}
+        transition={{ duration: 0.15 }}
       />
     </>
   );

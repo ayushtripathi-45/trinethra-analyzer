@@ -14,8 +14,8 @@ export default function About() {
         animate="visible"
         variants={fadeInUp}
       >
-        <h1 className="gradient-text" style={{ fontSize: '3.5rem' }}>The Intelligence Layer</h1>
-        <p style={{ color: 'var(--text-dim)', fontSize: '1.2rem' }}>Deconstructing human perception through behavioral logic.</p>
+        <h1 className="gradient-text font-main" style={{ fontSize: '3.5rem' }}>The Intelligence Layer</h1>
+        <p className="font-secondary" style={{ color: 'var(--text-dim)', fontSize: '1.4rem' }}>Deconstructing human perception through behavioral logic.</p>
       </motion.header>
 
       <main style={{ maxWidth: '900px', margin: '40px auto' }}>
@@ -27,8 +27,8 @@ export default function About() {
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <h2 className="neon-text" style={{ marginBottom: '24px', fontSize: '2rem' }}>Trinethra Vision</h2>
-          <p style={{ lineHeight: '1.8', color: 'var(--text-main)', fontSize: '1.15rem' }}>
+          <h2 className="neon-text font-secondary" style={{ marginBottom: '24px', fontSize: '2rem' }}>Trinethra Vision</h2>
+          <p className="font-third" style={{ lineHeight: '1.8', color: 'var(--text-main)', fontSize: '1.15rem' }}>
             Trinethra is the "third eye" of B2B consulting. We transform informal, often biased supervisor feedback into high-fidelity behavioral data. By stripping away tone and focusing on concrete evidence, we provide an objective map of professional capability.
           </p>
         </motion.section>
@@ -41,8 +41,8 @@ export default function About() {
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <h2 className="neon-text" style={{ marginBottom: '24px', fontSize: '2rem' }}>Strategic Rubric</h2>
-          <p style={{ lineHeight: '1.8', color: 'var(--text-main)', fontSize: '1.15rem', marginBottom: '30px' }}>
+          <h2 className="neon-text font-secondary" style={{ marginBottom: '24px', fontSize: '2rem' }}>Strategic Rubric</h2>
+          <p className="font-third" style={{ lineHeight: '1.8', color: 'var(--text-main)', fontSize: '1.15rem', marginBottom: '30px' }}>
             The DeepThought scale is not a measure of "effort," but of **Independent Systems Impact**.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
